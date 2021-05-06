@@ -15,9 +15,11 @@ class MyApp extends StatelessWidget {
       theme: MyTheme.lightTheme(),
       initialRoute: '/',
       routes: {
-        '/': (context) => MainMenu(),
+        '/': (context) => Splash(),
         MainMenu.routeName: (context) => MainMenu(),
         Onboard.routeName: (context) => Onboard(),
+        AddTask.routeName: (context) => AddTask(),
+        MyTask.routeName: (context) => MyTask(),
         // 'history': (context) => History(),
       },
     );
