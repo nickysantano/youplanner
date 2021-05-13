@@ -1,6 +1,10 @@
-part of 'pages.dart';
+part of '../pages.dart';
 
 class AddTask extends StatefulWidget {
+  final DateTime selectedDate;
+
+  const AddTask({Key key, this.selectedDate}) : super(key: key);
+
   @override
   _AddTaskState createState() => _AddTaskState();
   static const String routeName = "/addtask";
@@ -26,9 +30,19 @@ class _AddTaskState extends State<AddTask> {
           Center(
             child: ElevatedButton(
               onPressed: () async {
-                Navigator.push(context,
-                    new MaterialPageRoute(builder: (context) => new MyTask()));
                 //save task
+                bool validated = _formKey.currentState.validate();
+                if(validated){
+                  _formKey.currentState.save();
+                  final data = Map<String,dynamic>.from(_formKey.currentState.value);
+                  data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
+                  // data['user_id'] = context.read(userRepoProvider).user.id;
+                  await taskDBS.create(data);
+                  Navigator.pop(context);
+                }
+
+                // Navigator.push(context,
+                //   new MaterialPageRoute(builder: (context) => new MyTask()));
               },
               child: Text("Save"),
             ),
@@ -39,9 +53,13 @@ class _AddTaskState extends State<AddTask> {
         padding: const EdgeInsets.all(16.0),
         children: <Widget>[
           FormBuilder(
+            key: _formKey,
               child: Column(
             children: [
               FormBuilderTextField(
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(context),
+                ]),
                 name: "title",
                 decoration: InputDecoration(
                   hintText: "Add Title",
@@ -71,7 +89,8 @@ class _AddTaskState extends State<AddTask> {
               Divider(),
               FormBuilderDateTimePicker(
                 name: "date",
-                initialValue: DateTime.now(),
+                initialValue: widget.selectedDate ??
+                DateTime.now(),
                 fieldHintText: "Add Date",
                 inputType: InputType.date,
                 format: DateFormat('EEEE, dd MMMM, yyyy'),

@@ -182,9 +182,7 @@ class _RegisterState extends State<Register> {
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                new MaterialPageRoute(
-                                    builder: (context) => new Login()));
+                                context, PageTransition(type: PageTransitionType.fade, child: Login()));
                           },
                           child: Text(
                             "Already registered? Login here!",

@@ -8,7 +8,7 @@ class MainMenu extends StatefulWidget {
 }
 
 class _MainMenuState extends State<MainMenu> {
-  int _selectedIndex = 0;
+  int _selectedItem = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
     MyTask(),
@@ -19,7 +19,7 @@ class _MainMenuState extends State<MainMenu> {
 
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
+      _selectedItem = index;
     });
   }
 
@@ -31,42 +31,94 @@ class _MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+      bottomNavigationBar: CustomBottomNavigationBar(
+        iconList: [
+          Icons.home,
+          Icons.access_alarm,
+          Icons.access_time_sharp,
+          Icons.person,
+        ],
+        onChange: (val) {
+          setState(() {
+            _selectedItem = val;
+          });
+        },
+        defaultSelectedIndex: 0,
       ),
-      bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(
-            canvasColor: Color(0xFFf96060),
-            primaryColor: Colors.white,
-            textTheme: Theme.of(context)
-                .textTheme
-                .copyWith(caption: TextStyle(color: Colors.grey))),
-        child: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.note_add_rounded),
-              label: 'My Task',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.timer_rounded),
-              label: 'Stopwatch',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.alarm,
-              ),
-              label: 'Clock',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_box_rounded),
-              label: 'My Profile',
-            ),
-          ],
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          elevation: 0,
-          // backgroundColor: Colors.red,
-          // fixedColor: Colors.red,
+      body: Center(
+          child: _widgetOptions.elementAt(_selectedItem)
+      ),
+    );
+  }
+}
+
+class CustomBottomNavigationBar extends StatefulWidget {
+  final int defaultSelectedIndex;
+  final Function(int) onChange;
+  final List<IconData> iconList;
+
+  CustomBottomNavigationBar(
+      {this.defaultSelectedIndex = 0,
+      @required this.iconList,
+      @required this.onChange});
+
+  @override
+  _CustomBottomNavigationBarState createState() =>
+      _CustomBottomNavigationBarState();
+}
+
+class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
+  int _selectedIndex = 0;
+  List<IconData> _iconList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _selectedIndex = widget.defaultSelectedIndex;
+    _iconList = widget.iconList;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> _navBarItemList = [];
+
+    for (var i = 0; i < _iconList.length; i++) {
+      _navBarItemList.add(buildNavBarItem(_iconList[i], i));
+    }
+
+    return Row(
+      children: _navBarItemList,
+    );
+  }
+
+  Widget buildNavBarItem(IconData icon, int index) {
+    return GestureDetector(
+      onTap: () {
+        widget.onChange(index);
+        setState(() {
+          _selectedIndex = index;
+        });
+      },
+      child: Container(
+        height: 60,
+        width: MediaQuery.of(context).size.width / _iconList.length,
+        decoration: index == _selectedIndex
+            ? BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(width: 4, color: Color(0xFFf96060)),
+                ),
+                gradient: LinearGradient(colors: [
+                  Color(0xFFf96060).withOpacity(0.3),
+                  Color(0xFFf96060).withOpacity(0.015),
+                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
+                // color: index == _selectedItemIndex ? Colors.green : Colors.white,
+                )
+            : BoxDecoration(),
+        child: Icon(
+          icon,
+          color: index == _selectedIndex ? Color(0xFFf96060) : Colors.grey,
         ),
       ),
     );

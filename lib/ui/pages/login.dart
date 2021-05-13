@@ -134,9 +134,7 @@ class _LoginState extends State<Login> {
                                     ActivityServices.showToast(
                                         "Login success", Colors.greenAccent);
                                     Navigator.push(
-                                        context,
-                                        new MaterialPageRoute(
-                                            builder: (context) => new MainMenu()));
+                                        context, PageTransition(type: PageTransitionType.fade, child: MainMenu()));
                                   } else {
                                     setState(() {
                                       isLoading = false;
@@ -164,7 +162,7 @@ class _LoginState extends State<Login> {
                       SizedBox(height: 24),
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushReplacement(
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => new Register()));

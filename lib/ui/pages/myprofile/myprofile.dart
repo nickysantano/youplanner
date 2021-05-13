@@ -1,4 +1,4 @@
-part of 'pages.dart';
+part of '../pages.dart';
 
 class MyProfile extends StatefulWidget {
   @override
@@ -14,6 +14,10 @@ class _MyProfileState extends State<MyProfile> {
     return Scaffold(
         appBar: AppBar(
           title: Text("My Account"),
+          backgroundColor: Color(0xFFf96060),
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
         ),
         body: Stack(
           children: [
@@ -46,7 +50,7 @@ class _MyProfileState extends State<MyProfile> {
                   icon: Icon(Icons.logout),
                   label: Text("Logout"),
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.deepOrange[400],
+                    primary: Color(0xFFf96060),
                     elevation: 0,
                   )),
             ),

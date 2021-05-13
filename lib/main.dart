@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Advanced MAD",
+      title: "YouPlaner",
       theme: MyTheme.lightTheme(),
       initialRoute: '/',
       routes: {

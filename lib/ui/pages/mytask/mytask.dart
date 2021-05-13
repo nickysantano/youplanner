@@ -1,4 +1,4 @@
-part of 'pages.dart';
+part of '../pages.dart';
 
 class MyTask extends StatefulWidget {
   @override
@@ -14,14 +14,19 @@ class _MyTaskState extends State<MyTask> {
     return Scaffold(
       appBar: AppBar(
         title: Text("My Task"),
+        backgroundColor: Color(0xFFf96060),
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Card(
-              clipBehavior: Clip.antiAlias,
-              margin: const EdgeInsets.all(8.0),
+              // clipBehavior: Clip.antiAlias,
+              margin: const EdgeInsets.all(0.0),
+              elevation: 0,
               child: TableCalendar(
                 calendarController: _calendarController,
                 weekendDays: [7],
@@ -51,14 +56,44 @@ class _MyTaskState extends State<MyTask> {
                 builders: CalendarBuilders(),
               ),
             ),
+
+            StreamBuilder(
+              stream: taskDBS.streamQueryList(
+                args: [
+                  QueryArgsV2(
+                    'user_id',
+                    // isEqualTo: context.read(userRepoProvider).user.id
+                  ),
+                ]
+              ) ,
+              builder: (BuildContext context, AsyncSnapshot snapshot){
+                if(snapshot.hasData){
+                  final tasks = snapshot.data;
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: tasks.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Tasks task = tasks[index];
+                      return ListTile(
+                        title: Text(task.title),
+                        subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(task.date)),
+                        onTap: () => Navigator.push(context,PageTransition(type: PageTransitionType.bottomToTop, child: TaskDetails())),
+                      );
+                    },
+                  );
+                }
+                return CircularProgressIndicator();
+              },
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
+        backgroundColor: Color(0xFFf96060),
         onPressed: () {
-          Navigator.push(context,
-              new MaterialPageRoute(builder: (context) => new AddTask()));
+          Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeftWithFade, child: AddTask()));
         },
       ),
     );

@@ -20,7 +20,7 @@ class Onboarding extends StatefulWidget {
   _OnboardingState createState() => _OnboardingState();
 }
 
-class _OnboardingState extends State<Onboarding> {
+class _OnboardingState extends State<Onboarding> with TickerProviderStateMixin{
   int currentPage = 0;
 
   PageController _pageController = new PageController(
@@ -76,10 +76,7 @@ class _OnboardingState extends State<Onboarding> {
                 children: [
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, new MaterialPageRoute(
-                        builder: (context) =>
-                          new Register()
-                        )
+                      Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: Register())
                       );
                     },
                     child: Container(
@@ -103,11 +100,8 @@ class _OnboardingState extends State<Onboarding> {
 
                   InkWell(
                   onTap: (){
-                    Navigator.push(context, new MaterialPageRoute(
-                        builder: (context) =>
-                          new Login()
-                        )
-                      );
+                    Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: Login()));
+
                   },
                   child: Text("Login", style: TextStyle(
                     color: Colors.white,

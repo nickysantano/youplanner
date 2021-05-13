@@ -1,6 +1,6 @@
 part of 'services.dart';
 
-class AuthServices {
+class AuthServices extends ChangeNotifier{
   static FirebaseAuth auth = FirebaseAuth.instance;
   static CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
