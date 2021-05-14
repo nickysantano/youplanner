@@ -12,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -28,6 +29,7 @@ import 'dart:math' as math;
 import 'package:youplanner/ui/pages/stopwatch/classes/dependencies.dart';
 import 'package:youplanner/ui/pages/stopwatch/screen/main_screen_landscape.dart';
 import 'package:youplanner/ui/pages/stopwatch/screen/main_screen_portrait.dart';
+import 'package:youplanner/ui/widgets/widgets.dart';
 
 
 part 'login.dart';

@@ -13,7 +13,7 @@ class ActivityServices{
       msg: msg,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.amberAccent,
+      backgroundColor: Color(0xFFf96060),
       textColor: Colors.white,
       fontSize: 14,
     );
@@ -25,7 +25,7 @@ class ActivityServices{
       width: double.infinity,
       height: double.infinity,
       color: Colors.white,
-      child: SpinKitFadingCircle(
+      child: SpinKitSpinningCircle(
         size: 50,
         color: Color(0xFFf96060),
       ),

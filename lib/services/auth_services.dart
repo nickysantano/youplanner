@@ -6,7 +6,7 @@ class AuthServices extends ChangeNotifier{
       FirebaseFirestore.instance.collection("users");
   static DocumentReference userDoc;
 
-  static Future<String> signUp(Users users) async {
+  static Future<String> signUp(Users users, PickedFile imgFile) async {
     await Firebase.initializeApp();
     String dateNow = ActivityServices.dateNow();
     String uid = "";
@@ -24,6 +24,8 @@ class AuthServices extends ChangeNotifier{
       'name': users.name,
       'email': users.email,
       'password': users.password,
+      'imagePath': users.imagePath,
+      'description':users.description,
       'token': token,
       'isOn': '0',
       'createdAt': dateNow,

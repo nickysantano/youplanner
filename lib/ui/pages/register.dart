@@ -13,6 +13,7 @@ class _RegisterState extends State<Register> {
   final ctrlPass = TextEditingController();
   bool isVisible = true;
   bool isLoading = false;
+  PickedFile imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -140,8 +141,8 @@ class _RegisterState extends State<Register> {
                                     isLoading = true;
                                   });
                                   Users users = new Users("", ctrlName.text,
-                                      ctrlEmail.text, ctrlPass.text, "", "");
-                                  await AuthServices.signUp(users)
+                                      ctrlEmail.text, ctrlPass.text, "", "no description.", "", "");
+                                  await AuthServices.signUp(users, imageFile)
                                       .then((value) {
                                     if (value == "success") {
                                       setState(() {

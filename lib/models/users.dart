@@ -5,6 +5,8 @@ class Users extends Equatable{
   final String name;
   final String email;
   final String password;
+  final String imagePath;
+  final String description;
   final String createdAt;
   final String updatedAt;
 
@@ -13,6 +15,8 @@ class Users extends Equatable{
     this.name,
     this.email,
     this.password,
+    this.imagePath,
+    this.description,
     this.createdAt,
     this.updatedAt,
   );
@@ -23,6 +27,8 @@ class Users extends Equatable{
     name,
     email,
     password,
+    imagePath,
+    description,
     createdAt,
     updatedAt
   ];

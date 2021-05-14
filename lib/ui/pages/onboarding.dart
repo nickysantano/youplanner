@@ -41,9 +41,9 @@ class _OnboardingState extends State<Onboarding> with TickerProviderStateMixin{
                 child: PageView(
                   controller: _pageController,
                   children: [
-                    onBoardPage("onboard1", "Welcome to YouPlanner"),
-                    onBoardPage("onboard2", "Work Happens"),
-                    onBoardPage("onboard3", "Task and Assign your video plans"),
+                    onBoardPage("onboard1", "Welcome to YouPlanner", "Whats going to happen tomorrow?"),
+                    onBoardPage("onboard2", "Work Happens", "Make sure to take notes and get to know when work happens."),
+                    onBoardPage("onboard3", "Assign your video plans", "Task and assign your video ideas for a better workflow."),
                   ],
                   onPageChanged: (value)=>{setCurrentPage(value)},
                 ),
@@ -129,7 +129,7 @@ class _OnboardingState extends State<Onboarding> with TickerProviderStateMixin{
       ),
     );
   }
-  Column onBoardPage(String img, String title){
+  Column onBoardPage(String img, String title, String desc){
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -162,16 +162,32 @@ class _OnboardingState extends State<Onboarding> with TickerProviderStateMixin{
           )
         ),
 
+        SizedBox(
+          height: 10,
+        ),
+
         Container(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
           child: Text(
-            'Lorem ipsum dummy text lol u gud boi so nice. nice is a word that makes people happy',
+            desc, 
             style: TextStyle(
               fontSize: 16,
               color: Colors.grey
-            ),textAlign: TextAlign.center,
-          ),
-        )
+            ),
+            textAlign: TextAlign.center,
+          )
+        ),
+
+        // Container(
+        //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+        //   child: Text(
+        //     'Lorem ipsum dummy text lol u gud boi so nice. nice is a word that makes people happy',
+        //     style: TextStyle(
+        //       fontSize: 16,
+        //       color: Colors.grey
+        //     ),textAlign: TextAlign.center,
+        //   ),
+        // )
 
       ],
     );

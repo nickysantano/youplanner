@@ -89,7 +89,7 @@ class MainScreenLandscapeState extends State<MainScreenLandscape> {
                                       widget.dependencies.savedTimeList
                                           .elementAt(index)),
                                   style: TextStyle(
-                                    fontSize: 20.0,
+                                    fontSize: 10.0,
                                   ),
                                 )),
                           );
