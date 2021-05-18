@@ -56,14 +56,16 @@ class Tasks {
     );
   }
 
-  factory Tasks.fromDS(String id, Map<String, dynamic> map) {
+  factory Tasks.fromDS(String id, Map<String, dynamic> data) {
+    if (data == null) return null;
+    
     return Tasks(
       id: id,
-      title: map['title'],
-      description: map['description'],
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
-      userId: map['userId'],
-      public: map['public'],
+      title: data['title'],
+      description: data['description'],
+      date: DateTime.fromMillisecondsSinceEpoch(data['date']),
+      userId: data['user_id'],
+      public: data['public'],
     );
   }
 

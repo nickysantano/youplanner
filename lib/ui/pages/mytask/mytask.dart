@@ -7,6 +7,9 @@ class MyTask extends StatefulWidget {
 }
 
 class _MyTaskState extends State<MyTask> {
+  String uid = FirebaseAuth.instance.currentUser.uid;
+  CollectionReference taskCollection =
+      FirebaseFirestore.instance.collection("tasks");
   CalendarController _calendarController = CalendarController();
 
   @override
@@ -56,18 +59,15 @@ class _MyTaskState extends State<MyTask> {
                 builders: CalendarBuilders(),
               ),
             ),
-
             StreamBuilder(
-              stream: taskDBS.streamQueryList(
-                args: [
-                  QueryArgsV2(
-                    'user_id',
-                    // isEqualTo: context.read(userRepoProvider).user.id
-                  ),
-                ]
-              ) ,
-              builder: (BuildContext context, AsyncSnapshot snapshot){
-                if(snapshot.hasData){
+              stream: taskDBS.streamQueryList(args: [
+                QueryArgsV2(
+                  'user_id',
+                  isEqualTo: uid,
+                ),
+              ]),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
                   final tasks = snapshot.data;
                   return ListView.builder(
                     shrinkWrap: true,
@@ -76,10 +76,18 @@ class _MyTaskState extends State<MyTask> {
                     itemBuilder: (BuildContext context, int index) {
                       Tasks task = tasks[index];
                       return ListTile(
-                        title: Text(task.title),
-                        subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(task.date)),
-                        onTap: () => Navigator.push(context,PageTransition(type: PageTransitionType.bottomToTop, child: TaskDetails())),
-                      );
+                          title: Text(task.title),
+                          subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy")
+                              .format(task.date)),
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context, TaskDetails.routeName, arguments: task
+                            );
+                            
+                            // Navigator.pushNamed(
+                            //   context, TaskDetails.routeName, arguments: TaskDetailsData(tasks)
+                            // );
+                          });
                     },
                   );
                 }
@@ -93,7 +101,11 @@ class _MyTaskState extends State<MyTask> {
         child: Icon(Icons.add),
         backgroundColor: Color(0xFFf96060),
         onPressed: () {
-          Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeftWithFade, child: AddTask()));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeftWithFade,
+                  child: AddTask()));
         },
       ),
     );

@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "YouPlaner",
+      title: "YouPlanner",
       theme: MyTheme.lightTheme(),
       initialRoute: '/',
       routes: {
@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         Onboard.routeName: (context) => Onboard(),
         AddTask.routeName: (context) => AddTask(),
         MyTask.routeName: (context) => MyTask(),
+        TaskDetails.routeName: (context) => TaskDetails(),
         // 'history': (context) => History(),
       },
     );
