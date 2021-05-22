@@ -17,11 +17,6 @@ class _MainMenuState extends State<MainMenu> {
     MyProfile(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedItem = index;
-    });
-  }
 
   @override
   void initState() {
@@ -73,7 +68,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     _selectedIndex = widget.defaultSelectedIndex;

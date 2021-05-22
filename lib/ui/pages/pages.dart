@@ -17,20 +17,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:youplanner/core/providers/providers.dart';
 import 'package:youplanner/models/models.dart';
 import 'package:youplanner/models/tasks.dart';
 import 'package:youplanner/services/services.dart';
 import 'package:youplanner/services/task_services.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:youplanner/shared/shared.dart';
 import 'dart:math' as math;
 
 import 'package:youplanner/ui/pages/stopwatch/classes/dependencies.dart';
 import 'package:youplanner/ui/pages/stopwatch/screen/main_screen_landscape.dart';
 import 'package:youplanner/ui/pages/stopwatch/screen/main_screen_portrait.dart';
-import 'package:youplanner/ui/widgets/widgets.dart';
 
 
 part 'login.dart';

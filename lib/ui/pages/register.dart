@@ -141,7 +141,7 @@ class _RegisterState extends State<Register> {
                                     isLoading = true;
                                   });
                                   Users users = new Users("", ctrlName.text,
-                                      ctrlEmail.text, ctrlPass.text, "", "no description.", "", "");
+                                      ctrlEmail.text, ctrlPass.text, defaultPicturePath, "no description.", "", "");
                                   await AuthServices.signUp(users, imageFile)
                                       .then((value) {
                                     if (value == "success") {
