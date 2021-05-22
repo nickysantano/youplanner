@@ -35,8 +35,11 @@ class MyApp extends StatelessWidget {
         AddTask.routeName: (context) => AddTask(),
         MyTask.routeName: (context) => MyTask(),
 <<<<<<< HEAD
+<<<<<<< HEAD
         TaskDetails.routeName: (context) => TaskDetails(),
 =======
+=======
+>>>>>>> parent of 1580f7e (update)
         // 'history': (context) => History(),
 >>>>>>> parent of 1580f7e (update)
       },
