@@ -78,7 +78,9 @@ class _MyTaskState extends State<MyTask> {
                       return ListTile(
                         title: Text(task.title),
                         subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(task.date)),
-                        onTap: () => Navigator.push(context,PageTransition(type: PageTransitionType.bottomToTop, child: TaskDetails())),
+                        onTap: () => Navigator.pushNamed(
+                          context, TaskDetails.routeName, arguments: task
+                        ),
                       );
                     },
                   );
