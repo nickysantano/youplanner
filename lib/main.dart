@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "YouPlaner",
+      title: "YouPlanner",
       theme: MyTheme.lightTheme(),
       initialRoute: '/',
       routes: {
@@ -34,17 +34,7 @@ class MyApp extends StatelessWidget {
         Onboard.routeName: (context) => Onboard(),
         AddTask.routeName: (context) => AddTask(),
         MyTask.routeName: (context) => MyTask(),
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         TaskDetails.routeName: (context) => TaskDetails(),
-=======
-=======
->>>>>>> parent of 1580f7e (update)
-=======
->>>>>>> parent of 1580f7e (update)
-        // 'history': (context) => History(),
->>>>>>> parent of 1580f7e (update)
       },
     );
   }
