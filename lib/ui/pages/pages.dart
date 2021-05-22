@@ -5,7 +5,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_helpers/firebase_helpers.dart';
@@ -43,6 +42,5 @@ part 'clock/clock.dart';
 part 'stopwatch/stopwatch.dart';
 part 'myprofile/myprofile.dart';
 part 'mytask/addtask.dart';
-part 'mytask/taskdetails.dart';
+part 'taskdetails.dart';
 part 'stopwatch/classes/clock_painter.dart';
-part 'mytask/taskdetailsdata.dart';

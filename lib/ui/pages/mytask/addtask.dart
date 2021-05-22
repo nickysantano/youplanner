@@ -11,8 +11,6 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  String uid = FirebaseAuth.instance.currentUser.uid;
-  CollectionReference taskCollection = FirebaseFirestore.instance.collection("tasks");
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
@@ -38,8 +36,7 @@ class _AddTaskState extends State<AddTask> {
                   _formKey.currentState.save();
                   final data = Map<String,dynamic>.from(_formKey.currentState.value);
                   data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
-                  // data['user_id'] = context.read(userRepoProvider).user.uid;
-                  data['user_id'] = FirebaseAuth.instance.currentUser.uid;
+                  // data['user_id'] = context.read(userRepoProvider).user.id;
                   await taskDBS.create(data);
                   Navigator.pop(context);
                 }
@@ -59,7 +56,6 @@ class _AddTaskState extends State<AddTask> {
             key: _formKey,
               child: Column(
             children: [
-              
               FormBuilderTextField(
                 validator: FormBuilderValidators.compose([
                   FormBuilderValidators.required(context),
@@ -92,7 +88,6 @@ class _AddTaskState extends State<AddTask> {
               ),
               Divider(),
               FormBuilderDateTimePicker(
-                validator: FormBuilderValidators.compose([FormBuilderValidators.required(context)]),
                 name: "date",
                 initialValue: widget.selectedDate ??
                 DateTime.now(),

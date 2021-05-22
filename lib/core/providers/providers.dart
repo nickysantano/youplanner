@@ -6,7 +6,7 @@ import 'package:youplanner/services/services.dart';
 
 final userRepoProvider = ChangeNotifierProvider<AuthServices>((ref) {
   // final notifService = ref.watch(pnProvider);
-  return AuthServices();
+  // return AuthServices.instance(notifService);
 });
 // final configProvider = Provider<AppConfig>((ref) => AppConfig(
 //   appTitle: AppConstants.appName,
