@@ -39,6 +39,7 @@ class _AddTaskState extends State<AddTask> {
                   _formKey.currentState.save();
                   final data = Map<String,dynamic>.from(_formKey.currentState.value);
                   data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
+                  data['user_id'] = FirebaseAuth.instance.currentUser.uid;
                   // data['user_id'] = context.read(userRepoProvider).user.id;
                   if(tasks == null){
                     await taskDBS.create(data);

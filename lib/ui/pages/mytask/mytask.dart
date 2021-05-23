@@ -7,11 +7,23 @@ class MyTask extends StatefulWidget {
 }
 
 class _MyTaskState extends State<MyTask> {
-    String uid = FirebaseAuth.instance.currentUser.uid;
+  String uid = FirebaseAuth.instance.currentUser.uid;
   CollectionReference taskCollection =
       FirebaseFirestore.instance.collection("tasks");
   CalendarController _calendarController = CalendarController();
   Map<DateTime, List<Tasks>> _groupedTasks;
+
+  _groupTasks(List<Tasks> tasks) {
+    _groupedTasks = {};
+    tasks.forEach((task) {
+      DateTime date =
+          DateTime.utc(task.date.year, task.date.month, task.date.day, 12);
+      if (_groupedTasks[date] == null) {
+        _groupedTasks[date] = [];
+        _groupedTasks[date].add(task);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +37,7 @@ class _MyTaskState extends State<MyTask> {
       ),
       body: SingleChildScrollView(
         child: StreamBuilder(
-           stream: taskDBS.streamQueryList(args: [
+          stream: taskDBS.streamQueryList(args: [
             QueryArgsV2(
               'user_id',
               isEqualTo: uid,
@@ -34,59 +46,77 @@ class _MyTaskState extends State<MyTask> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               final tasks = snapshot.data;
+              _groupTasks(tasks);
+              DateTime selectedDate = _calendarController.selectedDay;
+              final _selectedTasks = _groupedTasks[selectedDate] ?? [];
+
               return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Card(
-          // clipBehavior: Clip.antiAlias,
-          margin: const EdgeInsets.all(0.0),
-          elevation: 0,
-          child: TableCalendar(
-            calendarController: _calendarController,
-            weekendDays: [7],
-            headerStyle: HeaderStyle(
-              decoration: BoxDecoration(
-                color: Color(0xFFf96060),
-              ),
-              headerMargin: const EdgeInsets.only(bottom: 16.0),
-              titleTextStyle: TextStyle(
-                color: Colors.white,
-              ),
-              formatButtonDecoration: BoxDecoration(
-                border: Border.all(color: Colors.white),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              formatButtonTextStyle: TextStyle(color: Colors.white),
-              leftChevronIcon: Icon(
-                Icons.chevron_left,
-                color: Colors.white,
-              ),
-              rightChevronIcon: Icon(
-                Icons.chevron_right,
-                color: Colors.white,
-              ),
-            ),
-            calendarStyle: CalendarStyle(),
-            builders: CalendarBuilders(),
-          ),
-        ),
-
+                    // clipBehavior: Clip.antiAlias,
+                    margin: const EdgeInsets.all(0.0),
+                    elevation: 0,
+                    child: TableCalendar(
+                      calendarController: _calendarController,
+                      events: _groupedTasks,
+                      onDaySelected: (date, tasks, holidays){
+                        setState(() {
+                          
+                        });
+                      },
+                      weekendDays: [7],
+                      headerStyle: HeaderStyle(
+                        decoration: BoxDecoration(
+                          color: Color(0xFFf96060),
+                        ),
+                        headerMargin: const EdgeInsets.only(bottom: 16.0),
+                        titleTextStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        formatButtonDecoration: BoxDecoration(
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        formatButtonTextStyle: TextStyle(color: Colors.white),
+                        leftChevronIcon: Icon(
+                          Icons.chevron_left,
+                          color: Colors.white,
+                        ),
+                        rightChevronIcon: Icon(
+                          Icons.chevron_right,
+                          color: Colors.white,
+                        ),
+                      ),
+                      calendarStyle: CalendarStyle(),
+                      builders: CalendarBuilders(),
+                    ),
+                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 12.0, top: 8.0),
+                  //   child: Text(DateFormat('EEEE, dd MMMM, yyyy').format(selectedDate),
+                  //   style: Theme.of(context).textTheme.headline6,),
+                  // ),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    itemCount: tasks.length,
+                    itemCount: _selectedTasks.length,
+                    // itemCount: tasks.length,
                     itemBuilder: (BuildContext context, int index) {
-                      Tasks task = tasks[index];
+                      // Tasks task = tasks[index];
+                      Tasks task = _selectedTasks[index];
                       return ListTile(
                         title: Text(task.title),
-                        subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy").format(task.date)),
+                        subtitle: Text(DateFormat("EEEE, dd MMMM, yyyy")
+                            .format(task.date)),
                         onTap: () => Navigator.pushNamed(
-                          context, TaskDetails.routeName, arguments: task
-                        ),
+                            context, TaskDetails.routeName,
+                            arguments: task),
                         trailing: IconButton(
-                          icon: Icon(Icons.edit), 
-                          onPressed: ()=> Navigator.pushNamed(
-                            context, AddTask.routeName, arguments: task
-                          ),
+                          icon: Icon(Icons.edit),
+                          onPressed: () => Navigator.pushNamed(
+                              context, AddTask.routeName,
+                              arguments: task),
                         ),
                       );
                     },
@@ -102,7 +132,11 @@ class _MyTaskState extends State<MyTask> {
         child: Icon(Icons.add),
         backgroundColor: Color(0xFFf96060),
         onPressed: () {
-          Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeftWithFade, child: AddTask()));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeftWithFade,
+                  child: AddTask()));
         },
       ),
     );
