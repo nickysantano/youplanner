@@ -3,6 +3,7 @@ part of 'pages.dart';
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
+  static const String routeName = "/onboard";
 }
 
 class _LoginState extends State<Login> {

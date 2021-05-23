@@ -7,6 +7,9 @@ class MyTask extends StatefulWidget {
 }
 
 class _MyTaskState extends State<MyTask> {
+    String uid = FirebaseAuth.instance.currentUser.uid;
+  CollectionReference taskCollection =
+      FirebaseFirestore.instance.collection("tasks");
   CalendarController _calendarController = CalendarController();
 
   @override
@@ -58,16 +61,14 @@ class _MyTaskState extends State<MyTask> {
             ),
 
             StreamBuilder(
-              stream: taskDBS.streamQueryList(
-                args: [
-                  QueryArgsV2(
-                    'user_id',
-                    // isEqualTo: context.read(userRepoProvider).user.id
-                  ),
-                ]
-              ) ,
-              builder: (BuildContext context, AsyncSnapshot snapshot){
-                if(snapshot.hasData){
+               stream: taskDBS.streamQueryList(args: [
+                QueryArgsV2(
+                  'user_id',
+                  isEqualTo: uid,
+                ),
+              ]),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
                   final tasks = snapshot.data;
                   return ListView.builder(
                     shrinkWrap: true,
@@ -88,6 +89,7 @@ class _MyTaskState extends State<MyTask> {
                 return CircularProgressIndicator();
               },
             ),
+            
           ],
         ),
       ),

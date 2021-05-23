@@ -8,8 +8,13 @@ class Splash extends StatefulWidget {
 class _SplashState extends State<Splash> {
   @override
   void initState() {
-    splashToHome();
     super.initState();
+    _loadSplash();
+  }
+
+  _loadSplash() async{
+    var _duration = Duration(seconds: 3);
+    return Timer(_duration, checkAuth);
   }
   
   @override
@@ -37,4 +42,15 @@ class _SplashState extends State<Splash> {
         Navigator.pushReplacementNamed(context, Onboard.routeName);
       },
     );
-}}
+  }
+
+  void checkAuth() async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    if (auth.currentUser != null) {
+      Navigator.pushReplacementNamed(context, MainMenu.routeName);
+      ActivityServices.showToast("Welcome Back", Colors.blue);
+    } else {
+      Navigator.pushReplacementNamed(context, Onboard.routeName);
+    }
+  }
+}
