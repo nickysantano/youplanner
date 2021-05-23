@@ -2,7 +2,7 @@ part of '../pages.dart';
 
 class AddTask extends StatefulWidget {
   final DateTime selectedDate;
-
+  
   const AddTask({Key key, this.selectedDate}) : super(key: key);
 
   @override
@@ -11,10 +11,13 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
+  
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
+    Tasks tasks = ModalRoute.of(context).settings.arguments;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -24,7 +27,7 @@ class _AddTaskState extends State<AddTask> {
             Icons.clear,
             color: Color(0xFFf96060),
           ),
-          onPressed: () {},
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           Center(
@@ -37,7 +40,13 @@ class _AddTaskState extends State<AddTask> {
                   final data = Map<String,dynamic>.from(_formKey.currentState.value);
                   data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
                   // data['user_id'] = context.read(userRepoProvider).user.id;
-                  await taskDBS.create(data);
+                  if(tasks == null){
+                    await taskDBS.create(data);
+                  }else{
+                    //edit update
+                    await taskDBS.updateData(tasks.id, data);
+                  }
+                  
                   Navigator.pop(context);
                 }
 
@@ -61,6 +70,7 @@ class _AddTaskState extends State<AddTask> {
                   FormBuilderValidators.required(context),
                 ]),
                 name: "title",
+                initialValue: tasks?.title,
                 decoration: InputDecoration(
                   hintText: "Add Title",
                   border: InputBorder.none,
@@ -70,6 +80,7 @@ class _AddTaskState extends State<AddTask> {
               Divider(),
               FormBuilderTextField(
                 name: "description",
+                initialValue: tasks?.description,
                 minLines: 1,
                 maxLines: 5,
                 decoration: InputDecoration(
@@ -82,15 +93,15 @@ class _AddTaskState extends State<AddTask> {
               FormBuilderSwitch(
                 name: "public",
                 title: Text("Public"),
-                initialValue: false,
+                initialValue: tasks?.public ?? false,
                 controlAffinity: ListTileControlAffinity.leading,
                 decoration: InputDecoration(border: InputBorder.none),
               ),
               Divider(),
               FormBuilderDateTimePicker(
                 name: "date",
-                initialValue: widget.selectedDate ??
-                DateTime.now(),
+                initialValue: tasks != null ? tasks.date : 
+                widget.selectedDate ?? DateTime.now(),
                 fieldHintText: "Add Date",
                 inputType: InputType.date,
                 format: DateFormat('EEEE, dd MMMM, yyyy'),
