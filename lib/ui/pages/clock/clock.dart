@@ -31,7 +31,7 @@ class _ClockState extends State<Clock> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("My Task"),
+        title: Text("Clock"),
         backgroundColor: Color(0xFFf96060),
         elevation: 0,
         automaticallyImplyLeading: false,

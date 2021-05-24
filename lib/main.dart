@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:youplanner/shared/shared.dart';
 import 'package:youplanner/ui/pages/pages.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,11 @@ void main() async{
   enablePlatformOverrideForDesktop();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(
+    Phoenix(
+      child: MyApp()
+    ),
+  );
 }
 
 
@@ -25,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "YouPlaner",
+      title: "YouPlanner",
       theme: MyTheme.lightTheme(),
       initialRoute: '/',
       routes: {

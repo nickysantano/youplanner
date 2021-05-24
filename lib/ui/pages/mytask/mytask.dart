@@ -20,8 +20,11 @@ class _MyTaskState extends State<MyTask> {
           DateTime.utc(task.date.year, task.date.month, task.date.day, 12);
       if (_groupedTasks[date] == null) {
         _groupedTasks[date] = [];
-        _groupedTasks[date].add(task);
+        
+        // print('1' + task.toString());
+        print(_groupedTasks[date]);
       }
+      _groupedTasks[date].add(task);
     });
   }
 
@@ -46,9 +49,12 @@ class _MyTaskState extends State<MyTask> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               final tasks = snapshot.data;
+              // print(tasks);
               _groupTasks(tasks);
               DateTime selectedDate = _calendarController.selectedDay;
               final _selectedTasks = _groupedTasks[selectedDate] ?? [];
+              print('111' + _groupedTasks[selectedDate].toString());
+              print('222'+_selectedTasks.toString());
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,11 +98,11 @@ class _MyTaskState extends State<MyTask> {
                       builders: CalendarBuilders(),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left: 12.0, top: 8.0),
-                  //   child: Text(DateFormat('EEEE, dd MMMM, yyyy').format(selectedDate),
-                  //   style: Theme.of(context).textTheme.headline6,),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 12.0, top: 8.0),
+                    child: Text(DateFormat('EEEE, dd MMMM yyyy').format(selectedDate ?? DateTime.now()),
+                    style: Theme.of(context).textTheme.headline6,),
+                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),

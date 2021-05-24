@@ -136,6 +136,7 @@ class _LoginState extends State<Login> {
                                         "Login success", Colors.greenAccent);
                                     Navigator.push(
                                         context, PageTransition(type: PageTransitionType.fade, child: MainMenu()));
+                                        Phoenix.rebirth(context);
                                   } else {
                                     setState(() {
                                       isLoading = false;
