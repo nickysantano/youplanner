@@ -45,7 +45,7 @@ part 'mytask/mytask.dart';
 part 'clock/clock.dart';
 part 'stopwatch/stopwatch.dart';
 part 'myprofile/myprofile.dart';
+part 'myprofile/edit_profile.dart';
 part 'mytask/addtask.dart';
 part 'mytask/taskdetails.dart';
-part 'myprofile/profile_pict.dart';
 part 'stopwatch/classes/clock_painter.dart';

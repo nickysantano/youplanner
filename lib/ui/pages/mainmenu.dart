@@ -14,7 +14,7 @@ class _MainMenuState extends State<MainMenu> {
     MyTask(),
     Stopwatch(),
     Clock(),
-    MyProfile(),
+    Profile(),
   ];
 
 

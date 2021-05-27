@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
         AddTask.routeName: (context) => AddTask(),
         MyTask.routeName: (context) => MyTask(),
         TaskDetails.routeName: (context) => TaskDetails(),
+        EditProfile.routeName: (context) => EditProfile(),
         // 'history': (context) => History(),
       },
     );

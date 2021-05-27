@@ -6,6 +6,10 @@ class AuthServices extends ChangeNotifier{
       FirebaseFirestore.instance.collection("users");
   static DocumentReference userDoc;
 
+  static Reference ref;
+  static UploadTask uploadTask;
+  static String imgUrl;
+
   static Future<String> signUp(Users users, PickedFile imgFile) async {
     await Firebase.initializeApp();
     String dateNow = ActivityServices.dateNow();
@@ -77,6 +81,27 @@ class AuthServices extends ChangeNotifier{
         'token': '-',
         'updatedAt': dateNow,
       });
+    });
+
+    return true;
+  }
+
+  static Future<bool> changeProfilePicture(PickedFile imgFile) async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+
+    String uid = auth.currentUser.uid;
+
+    ref = FirebaseStorage.instance.ref().child("images").child(uid+"png");
+    uploadTask = ref.putFile(File(imgFile.path));
+
+    await uploadTask.whenComplete(() =>
+      ref.getDownloadURL().then((value) => imgUrl = value)
+    );
+
+    await userCollection.doc(uid).update({
+      'pic' : imgUrl,
+      'updatedAt' : dateNow,
     });
 
     return true;
