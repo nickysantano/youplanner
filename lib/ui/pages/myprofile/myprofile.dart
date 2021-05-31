@@ -61,6 +61,12 @@ class _ProfileState extends State<Profile> {
                           img: users.imagePath,
                         ),
                         SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          users.description
+                        ),
+                        SizedBox(
                           height: 20,
                         ),
                         ProfileMenu(

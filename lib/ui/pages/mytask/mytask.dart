@@ -97,6 +97,7 @@ class _MyTaskState extends State<MyTask> {
                       calendarStyle: CalendarStyle(
                         selectedColor: Color(0xFFf96060),
                         markersColor: Colors.deepOrange[200],
+                        todayColor: Colors.deepOrange[100],
                       ),
                       builders: CalendarBuilders(),
                     ),
