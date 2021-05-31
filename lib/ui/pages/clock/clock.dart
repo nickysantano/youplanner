@@ -48,7 +48,7 @@ class _ClockState extends State<Clock> {
               Transform.rotate(
                 child: Container(
                   child: Container(
-                    height: 140,
+                    height: 120,
                     width: 2,
                     decoration: BoxDecoration(
                       color: Colors.black, borderRadius: BorderRadius.circular(10),
@@ -63,7 +63,7 @@ class _ClockState extends State<Clock> {
               Transform.rotate(
                 child: Container(
                   child: Container(
-                    height: 115,
+                    height: 105,
                     width: 5,
                     decoration: BoxDecoration(
                       color: Colors.black, borderRadius: BorderRadius.circular(10),
@@ -78,8 +78,8 @@ class _ClockState extends State<Clock> {
               Transform.rotate(
                 child: Container(
                   child: Container(
-                    height: 75,
-                    width: 7,
+                    height: 65,
+                    width: 6,
                     decoration: BoxDecoration(
                       color: Colors.pink,
                       borderRadius: BorderRadius.circular(10),
@@ -104,8 +104,8 @@ class _ClockState extends State<Clock> {
 
             ],
           ),
-          width: 370,
-          height: 370,
+          width: 300,
+          height: 300,
           decoration: BoxDecoration(
             border: Border.all(
               color: Color(0xFFf96060),

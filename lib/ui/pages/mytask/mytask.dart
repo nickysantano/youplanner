@@ -124,6 +124,7 @@ class _MyTaskState extends State<MyTask> {
                             arguments: task),
                         trailing: IconButton(
                           icon: Icon(Icons.edit),
+                          color: Color(0xFFf96060),
                           onPressed: () => Navigator.pushNamed(
                               context, AddTask.routeName,
                               arguments: task),

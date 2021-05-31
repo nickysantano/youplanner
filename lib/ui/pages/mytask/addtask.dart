@@ -98,7 +98,7 @@ class _AddTaskState extends State<AddTask> {
               Divider(),
               FormBuilderSwitch(
                 name: "public",
-                title: Text("Public"),
+                title: Text("Important"),
                 initialValue: tasks?.public ?? false,
                 controlAffinity: ListTileControlAffinity.leading,
                 decoration: InputDecoration(border: InputBorder.none),

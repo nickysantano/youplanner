@@ -70,9 +70,9 @@ class _TaskDetailsState extends State<TaskDetails> {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: <Widget>[
-          Text(tasks.public ? "Public" : "Private"),
+          Text(tasks.public ? "IMPORTANT" : "Normal"),
           ListTile(
-            leading: Icon(Icons.event),
+            leading: Icon(Icons.event, color: Color(0xFFf96060),),
             title: Text(
               tasks.title,
               style: Theme.of(context).textTheme.headline5,
@@ -84,7 +84,7 @@ class _TaskDetailsState extends State<TaskDetails> {
 
           if(tasks.description != null)
           ListTile(
-            leading: Icon(Icons.short_text),
+            leading: Icon(Icons.short_text, color: Color(0xFFf96060),),
             title: Text(tasks.description,),
           ),
 
