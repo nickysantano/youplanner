@@ -94,7 +94,10 @@ class _MyTaskState extends State<MyTask> {
                           color: Colors.white,
                         ),
                       ),
-                      calendarStyle: CalendarStyle(),
+                      calendarStyle: CalendarStyle(
+                        selectedColor: Color(0xFFf96060),
+                        markersColor: Colors.deepOrange[200],
+                      ),
                       builders: CalendarBuilders(),
                     ),
                   ),
@@ -135,7 +138,10 @@ class _MyTaskState extends State<MyTask> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         backgroundColor: Color(0xFFf96060),
         onPressed: () {
           Navigator.push(

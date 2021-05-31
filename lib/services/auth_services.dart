@@ -106,4 +106,19 @@ class AuthServices extends ChangeNotifier{
 
     return true;
   }
+
+  static Future<bool> editProfile(Users users) async {
+    await Firebase.initializeApp();
+    String dateNow = ActivityServices.dateNow();
+    // String uid = auth.currentUser.uid;
+
+    await userCollection.doc(auth.currentUser.uid).update({
+      'name': users.name,
+      'password': users.password,
+      'description': users.description,
+      'updatedAt': dateNow
+    });
+    
+    return true;
+  }
 }

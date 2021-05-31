@@ -39,7 +39,7 @@ class _ClockState extends State<Clock> {
       ),
       body: Center(
         child: Container(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(5.0),
           child: Stack(
             children: <Widget>[
               Image.asset('assets/images/clock.png'),
@@ -63,13 +63,13 @@ class _ClockState extends State<Clock> {
               Transform.rotate(
                 child: Container(
                   child: Container(
-                    height: 95,
+                    height: 115,
                     width: 5,
                     decoration: BoxDecoration(
                       color: Colors.black, borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  alignment: Alignment(0, -0.2),
+                  alignment: Alignment(0, -0.30),
                 ),
                 angle: minutesAngle,
               ),
@@ -78,14 +78,14 @@ class _ClockState extends State<Clock> {
               Transform.rotate(
                 child: Container(
                   child: Container(
-                    height: 70,
+                    height: 75,
                     width: 7,
                     decoration: BoxDecoration(
                       color: Colors.pink,
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  alignment: Alignment(0, -0.2),
+                  alignment: Alignment(0, -0.3),
                 ),
                 angle: hoursAngle,
               ),

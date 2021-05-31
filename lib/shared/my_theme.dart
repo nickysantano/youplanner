@@ -7,7 +7,7 @@ class MyTheme{
       primarySwatch: Colors.deepOrange,
       backgroundColor: Color(0xFFf2f2f2),
       scaffoldBackgroundColor: Color(0xFFf2f2f2),
-      primaryColor: Colors.deepOrange[400],
+      primaryColor: Colors.red[400],
       accentColor: Colors.deepOrange[200],
       visualDensity: VisualDensity.adaptivePlatformDensity,
       brightness: Brightness.light,

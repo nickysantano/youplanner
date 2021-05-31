@@ -31,30 +31,35 @@ class _AddTaskState extends State<AddTask> {
         ),
         actions: [
           Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                //save task
-                bool validated = _formKey.currentState.validate();
-                if(validated){
-                  _formKey.currentState.save();
-                  final data = Map<String,dynamic>.from(_formKey.currentState.value);
-                  data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
-                  data['user_id'] = FirebaseAuth.instance.currentUser.uid;
-                  // data['user_id'] = context.read(userRepoProvider).user.id;
-                  if(tasks == null){
-                    await taskDBS.create(data);
-                  }else{
-                    //edit update
-                    await taskDBS.updateData(tasks.id, data);
+            child: Container(
+              padding: EdgeInsets.only(right: 10),
+              child: ElevatedButton(
+                onPressed: () async {
+                  //save task
+                  bool validated = _formKey.currentState.validate();
+                  if(validated){
+                    _formKey.currentState.save();
+                    final data = Map<String,dynamic>.from(_formKey.currentState.value);
+                    data['date'] = (data['date'] as DateTime).millisecondsSinceEpoch;
+                    data['user_id'] = FirebaseAuth.instance.currentUser.uid;
+                    // data['user_id'] = context.read(userRepoProvider).user.id;
+                    if(tasks == null){
+                      await taskDBS.create(data);
+                    }else{
+                      //edit update
+                      await taskDBS.updateData(tasks.id, data);
+                    }
+                    
+                    Navigator.pop(context);
                   }
-                  
-                  Navigator.pop(context);
-                }
 
-                // Navigator.push(context,
-                //   new MaterialPageRoute(builder: (context) => new MyTask()));
-              },
-              child: Text("Save"),
+                  // Navigator.push(context,
+                  //   new MaterialPageRoute(builder: (context) => new MyTask()));
+                },
+                child: Text("Save"),
+                style: ElevatedButton.styleFrom(
+                    primary: Color(0xFFf96060), elevation: 0),
+              ),
             ),
           )
         ],
