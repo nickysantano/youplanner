@@ -48,7 +48,7 @@ class _ProfileState extends State<Profile> {
                       doc.data()['name'],
                       doc.data()['email'],
                       doc.data()['password'],
-                      doc.data()['pic'],
+                      doc.data()['imagePath'],
                       doc.data()['description'],
                       doc.data()['createdAt'],
                       doc.data()['updatedAt'],

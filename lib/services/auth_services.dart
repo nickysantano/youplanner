@@ -100,7 +100,7 @@ class AuthServices extends ChangeNotifier{
     );
 
     await userCollection.doc(uid).update({
-      'pic' : imgUrl,
+      'imagePath' : imgUrl,
       'updatedAt' : dateNow,
     });
 
